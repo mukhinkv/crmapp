@@ -19,5 +19,19 @@ services:
     networks:
       - internal
 
+  pgsql:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_DB=crmapp
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    networks:
+      - internal
+    volumes:
+      - ./var/db-data:/var/lib/postgresql/data
+
 networks:
   internal:
