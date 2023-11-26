@@ -13,5 +13,9 @@ RUN docker-php-ext-install zip \
     pdo \
     pdo_pgsql \
     pgsql
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+ADD /docker/php/config/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-debug.ini
 
 WORKDIR /var/www/crmapp

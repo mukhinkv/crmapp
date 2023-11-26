@@ -18,10 +18,12 @@ services:
       - ./:/var/www/crmapp
     networks:
       - internal
-
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      PHP_IDE_CONFIG: serverName=Docker
   pgsql:
     image: postgres:14.1-alpine
-    restart: always
     environment:
       - POSTGRES_DB=crmapp
       - POSTGRES_USER=postgres
@@ -32,6 +34,5 @@ services:
       - internal
     volumes:
       - ./var/db-data:/var/lib/postgresql/data
-
 networks:
   internal:
